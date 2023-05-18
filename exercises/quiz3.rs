@@ -12,18 +12,24 @@
 
 // 执行 `rustlings hint quiz3` 或在观察模式下使用 `hint` 子命令来获取提示。
 
-// I AM NOT DONE
+// // I AM NOT DONE
+// 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5
+// A+ A A- B+ B B- C+ C C- D+ D D- F+ F F-
 
-pub struct ReportCard {
-    pub grade: f32,
+use std::fmt::Display;
+
+pub struct ReportCard<T: Display> {
+    pub grade: T,
     pub student_name: String,
     pub student_age: u8,
 }
 
-impl ReportCard {
-    pub fn print(&self) -> String {
-        format!("{} ({}) - achieved a grade of {}",
-            &self.student_name, &self.student_age, &self.grade)
+impl<T: Display> ReportCard<T> {
+    fn print(&self) -> String {
+        format!(
+            "{} ({}) - achieved a grade of {}",
+            &self.student_name, &self.student_age, &self.grade
+        )
     }
 }
 
@@ -48,7 +54,7 @@ mod tests {
     fn generate_alphabetic_report_card() {
         // TODO: 完成练习后，要修改这个成绩
         let report_card = ReportCard {
-            grade: 2.1,
+            grade: "A+".to_string(),
             student_name: "Gary Plotter".to_string(),
             student_age: 11,
         };
