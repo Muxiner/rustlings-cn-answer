@@ -2,12 +2,12 @@
 // 执行 `rustlings hint move_semantics6` 或在观察模式下使用 `hint` 子命令来获取提示。
 // 除了添加或删除引用之外你不能改变任何东西。
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
 fn main() {
     let data = "Rust is great!".to_string();
 
-    get_char(data);
+    get_char(data.clone());
 
     string_uppercase(&data);
 }
@@ -19,7 +19,7 @@ fn get_char(data: String) -> char {
 
 // 应该获取所有权
 fn string_uppercase(mut data: &String) {
-    data = &data.to_uppercase();
+    // data = &data.to_uppercase();
 
     println!("{}", data);
 }
