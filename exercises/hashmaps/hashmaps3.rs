@@ -13,7 +13,7 @@
 
 // 执行 `rustlings hint hashmaps3` 或在观察模式下使用 `hint` 子命令来获取提示。
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
 use std::collections::HashMap;
 
@@ -37,6 +37,46 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // TODO: 使用从当前行提取的详细信息填充得分表。
         // 请记住，队伍1的得分将会是队伍2的丢分，
         // 同样，队伍2的得分也将会是队伍1的丢分。
+        // let insert_scores = |name, scores_1, scores_2| scores
+
+        let new_team = |name, goals_scored, goals_conceded| Team {
+            name,
+            goals_scored,
+            goals_conceded,
+        };
+
+        let updated = |scores: &mut HashMap<String, Team>, name: String, goals_scored, goals_conceded| {
+            let team_info =
+                scores
+                    .entry(name.clone())
+                    .or_insert(new_team(name.clone(), 0, 0));
+            *team_info = new_team(
+                name,
+                team_info.goals_scored + goals_scored,
+                team_info.goals_conceded + goals_conceded,
+            );
+        };
+
+        updated(&mut scores, team_1_name, team_1_score, team_2_score);
+        updated(&mut scores, team_2_name, team_2_score, team_1_score);
+        // let team_1_info =
+        //     scores
+        //         .entry(team_1_name.clone())
+        //         .or_insert(new_team(team_1_name.clone(), 0, 0));
+        // *team_1_info = new_team(
+        //     team_1_name,
+        //     team_1_info.goals_scored + team_1_score,
+        //     team_1_info.goals_conceded + team_2_score,
+        // );
+        // let team_2_info =
+        //     scores
+        //         .entry(team_2_name.clone())
+        //         .or_insert(new_team(team_2_name.clone(), 0, 0));
+        // *team_2_info = new_team(
+        //     team_2_name,
+        //     team_2_info.goals_scored + team_2_score,
+        //     team_2_info.goals_conceded + team_1_score,
+        // );
     }
     scores
 }
