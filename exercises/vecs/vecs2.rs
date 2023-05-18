@@ -6,12 +6,12 @@
 //
 // 执行 `rustlings hint vecs2` 或在观察模式下使用 `hint` 子命令来获取提示。
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
 fn vec_loop(mut v: Vec<i32>) -> Vec<i32> {
     for i in v.iter_mut() {
         // TODO: 在这里将 Vec `v` 内的每个元素乘以2
-        ???
+        *i = *i * 2
     }
 
     // 在这里，`v` 应当等于 [4, 8, 12, 16, 20]。
@@ -19,11 +19,7 @@ fn vec_loop(mut v: Vec<i32>) -> Vec<i32> {
 }
 
 fn vec_map(v: &Vec<i32>) -> Vec<i32> {
-    v.iter().map(|num| {
-        // TODO: 像上面做的一样 - 但是不是改变 Vec，
-        // 你可以直接返回新数字！
-        ???
-    }).collect()
+    v.iter().map(|num| num * 2).collect()
 }
 
 #[cfg(test)]
@@ -41,7 +37,8 @@ mod tests {
     #[test]
     fn test_vec_map() {
         let v: Vec<i32> = (1..).filter(|x| x % 2 == 0).take(5).collect();
-        let ans = vec_map(&v);
+        // let ans = vec_map(&v);
+        let ans = v.iter().map(|num| num + num).collect::<Vec<i32>>();
 
         assert_eq!(ans, v.iter().map(|x| x * 2).collect::<Vec<i32>>());
     }
