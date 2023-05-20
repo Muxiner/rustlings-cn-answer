@@ -7,7 +7,7 @@
 // 只需要改变两个迭代器方法 (count_iterator 和 count_collection_iterator)
 // 执行 `rustlings hint iterators5` 或在观察模式下使用 `hint` 子命令来获取提示。
 //
-// 让代码可以编译，测试可以通过。
+// // 让代码可以编译，测试可以通过。
 
 // I AM NOT DONE
 
@@ -33,7 +33,14 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map是一个有 String 键和 Progress 值的哈希表。
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    // todo!();
+    let mut count = 0;
+    for (key, val) in map.iter() {
+        if val == &value {
+            count += 1;
+        }
+    }
+    count
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -52,7 +59,16 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection 是哈希表的切片。
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    // todo!();
+    let mut count = 0;
+    for map in collection.iter() {
+        for (key, val) in map.iter() {
+            if val == &value {
+                count += 1;
+            }
+        }
+    }
+    count
 }
 
 #[cfg(test)]
