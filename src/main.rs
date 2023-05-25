@@ -156,7 +156,7 @@ fn main() {
     match command {
         Subcommands::List(subargs) => {
             if !subargs.paths && !subargs.names {
-                println!("{:<17}\t{:<46}\t{:<7}", "名字", "路径", "状态");
+                println!("{:<17}\t{:<38}\t{:<7}", "名字", "路径", "状态");
             }
             let mut exercises_done: u16 = 0;
             let filters = subargs.filter.clone().unwrap_or_default().to_lowercase();
