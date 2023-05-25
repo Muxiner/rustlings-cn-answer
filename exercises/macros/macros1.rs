@@ -1,7 +1,7 @@
 // macros1.rs
 // 执行 `rustlings hint macros1` 或在观察模式下使用 `hint` 子命令来获取提示。
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
 macro_rules! my_macro {
     () => {
@@ -10,5 +10,5 @@ macro_rules! my_macro {
 }
 
 fn main() {
-    my_macro();
+    my_macro!();
 }
