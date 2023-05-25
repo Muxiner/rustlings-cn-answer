@@ -22,7 +22,7 @@ enum IntoColorError {
     IntConversion,
 }
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
 // 你的任务是完成这个实现并返回一个 Ok 结果，内含一个 Color 类型。
 // 你需要针对一个包含三个整数的元组、一个包含三个整数的数组以及一个整数切片创建实现。
@@ -35,6 +35,15 @@ enum IntoColorError {
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
     fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        let in_range = |x: i16| 0 <= x && x <= 255;
+        match tuple {
+            (r, g, b) if in_range(r) && in_range(b) && in_range(g) => Ok(Color {
+                red: r as u8,
+                green: g as u8,
+                blue: b as u8,
+            }),
+            _ => Err(IntoColorError::IntConversion),
+        }
     }
 }
 
@@ -42,6 +51,15 @@ impl TryFrom<(i16, i16, i16)> for Color {
 impl TryFrom<[i16; 3]> for Color {
     type Error = IntoColorError;
     fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+        let in_range = |x: i16| 0 <= x && x <= 255;
+        match arr {
+            [r, g, b] if in_range(r) && in_range(b) && in_range(g) => Ok(Color {
+                red: r as u8,
+                green: g as u8,
+                blue: b as u8,
+            }),
+            _ => Err(IntoColorError::IntConversion),
+        }
     }
 }
 
@@ -49,6 +67,18 @@ impl TryFrom<[i16; 3]> for Color {
 impl TryFrom<&[i16]> for Color {
     type Error = IntoColorError;
     fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        let in_range = |x: i16| 0 <= x && x <= 255;
+        match (*slice).len() {
+            3 => match *slice {
+                [r, g, b] if in_range(r) && in_range(b) && in_range(g) => Ok(Color {
+                    red: r as u8,
+                    green: g as u8,
+                    blue: b as u8,
+                }),
+                _ => Err(IntoColorError::IntConversion),
+            },
+            _ => Err(IntoColorError::BadLen),
+        }
     }
 }
 

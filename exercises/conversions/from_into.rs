@@ -33,10 +33,32 @@ impl Default for Person {
 // 如果当解析 age 时发生了错误，那么返回默认版本的 Person
 // 不然， 利用结果返回一个实例化的 Person 对象。
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        let Person = Person::default();
+        match s.len() {
+            0 => Person,
+            _ => {
+                let parts: Vec<&str> = s.split(',').collect();
+                match parts.len() {
+                    2 => {
+                        match parts[0].len() {
+                            0 => Person,
+                            _ => match parts[1].parse() {
+                                Ok(x) => Person {
+                                    name: parts[0].to_string(),
+                                    age: x,
+                                },
+                                Err(_) => Person,
+                            },
+                        }
+                    }
+                    _ => Person,
+                }
+            }
+        }
     }
 }
 
